@@ -16,6 +16,15 @@ export default {
         ternary: "#FEF6F7"
       },
     },
+    keyframes: {
+      enterScreen: {
+        '0%': { transform: 'scale(0)' },
+        '100%': { transform: 'scale(1)' },
+      }
+    },
+    animation: {
+      enterScreen: 'enterScreen 0.5s ease-in-out'
+    }
   },
   plugins: [],
 }
