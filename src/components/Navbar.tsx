@@ -34,7 +34,9 @@ export default function Navbar() {
                 </button>
                 <div className={`w-fit mr-2 transition-all duration-300 ${top == 0 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16 -translate-x-10 scale-150"}`}>
                     <h2 className={"block text-3xl font-extrabold text-primary bg-ternary px-2 transition-all duration-300 " +
-                        (top == 0 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16 -translate-x-10 scale-150")}>BYVALS</h2>
+                        (top == 0 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16 -translate-x-10 scale-150")}>
+                        BYVALS
+                    </h2>
                 </div>
             </div>
 

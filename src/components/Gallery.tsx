@@ -49,7 +49,7 @@ export default function Gallery() {
         <>
             <div
                 id="fullscreen-image"
-                className={`fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75`}
+                className={`fixed z-40 top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75`}
                 onClick={() => setSelectedImageIndex(null)}
                 style={{pointerEvents: selectedImageIndex !== null ? "auto" : "none"}}
             >
@@ -57,7 +57,7 @@ export default function Gallery() {
                     <img
                         src={images[selectedImageIndex]}
                         alt={`Image ${selectedImageIndex + 1}`}
-                        className="max-h-full w-11/12 rounded-lg animate-enterScreen md:max-w-full md:w-fit"
+                        className="max-h-full -z-50 w-11/12 rounded-lg animate-enterScreen md:max-w-full md:w-fit"
                     />
                 )}
             </div>
@@ -66,8 +66,9 @@ export default function Gallery() {
                 {images.map((image, index) => (
                     <div ref={(ref: HTMLDivElement) => (imgList.current[index] = ref)}
                          key={index}
-                         className={`relative overflow-hidden rounded-lg m-5 shadow-xl drop-shadow-xl 
+                         className={`relative z-10 overflow-hidden rounded-lg m-5 shadow-xl drop-shadow-xl animate-enterScreen
                          ${index % 5 === 0 ? "w-36 h-28 md:w-96 md:h-60" : "w-28 h-20 md:w-56 md:h-36"}`}
+                         style={{animationDelay: `${index * 150}ms`}}
                          onClick={() => setSelectedImageIndex(index)}
                     >
                         <div
