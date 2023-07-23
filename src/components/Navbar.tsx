@@ -41,7 +41,7 @@ export default function Navbar() {
             </div>
 
             <ul ref={menuRef}
-                className={`absolute z-20 mt-4 px-3 pt-7 transition-all duration-500 bg-ternary rounded-r-lg drop-shadow-xl
+                className={`absolute mt-4 px-3 pt-7 transition-all duration-500 bg-ternary rounded-r-lg drop-shadow-xl
                 ${isNavOpen ? "opacity-100 translate-x-0 z-20" : "-z-10 opacity-0 -translate-x-20 pointer-events-none"}`}>
                 <li className="mb-4">
                     <Link to={"/"} className="flex items-center text-xl font-bold transition-all duration-500 ease-out
