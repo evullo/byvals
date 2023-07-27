@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar.tsx";
 import Footer from "../components/Footer.tsx";
-import Gallery from "../components/Gallery.tsx";
+import GalleryP from "../components/Gallery.tsx";
 import {Link} from "react-router-dom";
 
 export default function GalleryPage() {
@@ -19,7 +19,7 @@ export default function GalleryPage() {
                     </p>
                 </section>
 
-                <Gallery />
+                <GalleryP />
 
                 <section className={`w-4/5 mx-auto my-10 pt-5`}>
                     <p className={"font-bold w-2/3 mx-auto text-center md:text-lg lg:text-xl"}>

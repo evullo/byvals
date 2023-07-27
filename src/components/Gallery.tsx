@@ -1,13 +1,20 @@
 import { useLoadImages } from "../hooks/useLoadImages.ts";
 import { useEffect, useRef, useState } from "react";
 import VanillaTilt from "vanilla-tilt";
-import { gsap } from "gsap";
+import { buildLayoutFlat, Image } from "react-grid-gallery";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
-export default function Gallery() {
+export default function GalleryT() {
     const images = useLoadImages();
     const imgList = useRef<HTMLDivElement[]>([]);
-    const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
-    const [showFullScreen, setShowFullScreen] = useState<boolean>(false);
+    const [selectedImageIndex, setSelectedImageIndex] = useState<number>(-1);
+    const galleryRef = useRef<HTMLDivElement>(null);
+
+    const thumbnails = buildLayoutFlat<Image>(images, {
+        containerWidth: galleryRef.current ? galleryRef.current.getBoundingClientRect().width : window.innerWidth,
+        margin: 16,
+    });
 
     useEffect(() => {
         if(images.length > 0) {
@@ -25,57 +32,39 @@ export default function Gallery() {
                 }, index * 150)
             })
         }
-
-        const fullscreenElement = document.getElementById("fullscreen-image");
-        const animateFullscreen = (element, showFullscreen) => {
-            gsap.to(element, {
-                duration: 0.5,
-                opacity: showFullscreen ? 1 : 0,
-                scale: showFullscreen ? 1 : 0.2,
-                onComplete: () => {
-                    if (!showFullscreen) setSelectedImageIndex(null)
-                }
-            });
-        };
-
-        if (selectedImageIndex !== null) animateFullscreen(fullscreenElement, showFullScreen)
-    }, [images, selectedImageIndex, showFullScreen]);
+    }, [images]);
 
     return (
-        <>
-            {selectedImageIndex !== null && (
-                <div
-                    id="fullscreen-image"
-                    className={`fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75`}
-                    onClick={() => setShowFullScreen(false)}
-                >
-                    <img
-                        src={images[selectedImageIndex]}
-                        alt={`Image ${selectedImageIndex + 1}`}
-                        className="max-h-full w-11/12 rounded-lg animate-enterScreen md:max-w-full md:w-fit"
-                    />
-                </div>
-            )}
-
-            <div className={"z-0 flex flex-wrap items-center justify-around max-w-[90%] mx-auto mb-10"}>
-                {images.map((image, index) => (
-                    <div ref={(ref: HTMLDivElement) => (imgList.current[index] = ref)}
-                         key={index}
-                         className={`relative z-0 overflow-hidden rounded-lg m-5 shadow-xl drop-shadow-xl animate-enterScreen
-                         ${index % 5 === 0 ? "w-36 h-28 md:w-96 md:h-60" : "w-28 h-20 md:w-56 md:h-36"}`}
-                         style={{animationDelay: `${index * 150}ms`, visibility: 'hidden'}}
-                         onClick={() => {
-                             setShowFullScreen(true);
-                             setSelectedImageIndex(index);
-                         }}>
+        <div className={`lg:w-10/12 mx-auto`}>
+            <div ref={galleryRef} className={`flex flex-wrap justify-center`}>
+                {thumbnails.map((item, index) => (
+                    <div
+                        key={index}
+                        ref={(ref: HTMLDivElement) => (imgList.current[index] = ref)}
+                        className={`relative bg-transparent p-0 m-4 cursor-pointer shadow-lg animate-enterScreen`}
+                        style={{animationDelay: `${index * 150}ms`, visibility: 'hidden'}}
+                        onClick={() => setSelectedImageIndex(index)}
+                    >
                         <div
-                            className={`absolute w-full h-full bg-no-repeat bg-center bg-cover cursor-pointer 
-                            transition-all duration-500 ease-in-out hover:scale-110 active:z-0`}
-                            style={{ backgroundImage: `url(${image})` }}>
+                            className={`overflow-hidden rounded-md`}
+                            style={{ width: item.viewportWidth, maxHeight: item.scaledHeight }}
+                        >
+                            <img
+                                className={`transition-all ease-in-out duration-500 hover:transform hover:scale-125`}
+                                src={item.src}
+                                alt={item.alt}
+                            />
                         </div>
                     </div>
                 ))}
             </div>
-        </>
+
+            <Lightbox
+                open={selectedImageIndex >= 0}
+                close={() => setSelectedImageIndex(-1)}
+                index={selectedImageIndex}
+                slides={images}
+            />
+        </div>
     );
 }
