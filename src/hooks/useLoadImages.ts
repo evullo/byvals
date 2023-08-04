@@ -20,103 +20,97 @@ import p16 from '../assets/gallery/p16.jpeg';
 import p17 from '../assets/gallery/p17.jpeg';
 import p18 from '../assets/gallery/p18.jpeg';
 
-// interface Image {
-//     src: string,
-//     width: number,
-//     height: number
-// }
-
 async function loadImageList(): Promise<Image[]> {
     return [
         {
             src: p1,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p2,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p3,
-            width: 390,
-            height: 512
+            width: 780,
+            height: 1024
         },
         {
             src: p4,
-            width: 512,
-            height: 390
+            width: 1024,
+            height: 780
         },
         {
             src: p5,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p6,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p7,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p8,
-            width: 340,
-            height: 500
+            width: 680,
+            height: 1024
         },
         {
             src: p9,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p10,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p11,
-            width: 340,
-            height: 500
+            width: 680,
+            height: 1024
         },
         {
             src: p12,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p13,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p14,
-            width: 512,
-            height: 340
+            width: 1024,
+            height: 680
         },
         {
             src: p15,
-            width: 512,
-            height: 512
+            width: 1024,
+            height: 1024
         },
         {
             src: p16,
-            width: 512,
-            height: 445
+            width: 1024,
+            height: 890
         },
         {
             src: p17,
-            width: 512,
-            height: 450
+            width: 1024,
+            height: 900
         },
         {
             src: p18,
-            width: 512,
-            height: 380
+            width: 1024,
+            height: 760
         }
     ]
 }
